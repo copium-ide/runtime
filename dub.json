@@ -1,0 +1,13 @@
+{
+	"authors": [
+		"halufun"
+	],
+	"copyright": "Copyright © 2025, halu",
+	"description": "runtime for copium ide packaged exports",
+	"license": "GPL-3.0-or-later",
+	"name": "runtime",
+	"dependencies": { 
+    },
+    "targetPath": "bin",
+	"targetType": "dynamicLibrary"
+}
