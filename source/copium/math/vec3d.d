@@ -32,15 +32,6 @@ public struct Vector3D
             static assert(0, "Operator " ~ op ~ " not implemented for Vector3D with scalar");
         }
     }
-    
-    // Operator overloading for scalar multiplication where the scalar is on the left (e.g., 2.0 * v)
-    public static Vector3D opBinaryRight(string op)(double scalar, Vector3D rhs) {
-        static if (op == "*") {
-            return Vector3D(scalar * rhs.x, scalar * rhs.y, scalar * rhs.z);
-        } else {
-            static assert(0, "Operator " ~ op ~ " not implemented for scalar * Vector3D");
-        }
-    }
 
     // Operator overloading for unary operations (e.g., -v)
     public Vector3D opUnary(string op)() const {
