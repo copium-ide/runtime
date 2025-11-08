@@ -1,0 +1,15 @@
+{
+	"authors": [
+		"halu"
+	],
+	"copyright": "Copyright © 2025, halu",
+	"description": "gui for copium ide",
+	"license": "GPL-3.0-or-later",
+	"name": "vecmath",
+	"dependencies": {
+		"runtime": {"repository": "git+https://github.com/copium-ide/runtime.git", "version": "~main"}
+    },
+    "targetPath": "bin",
+	"targetType": "executable",
+    "targetName": "vecmath"
+}
