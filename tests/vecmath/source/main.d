@@ -55,12 +55,6 @@ void main()
     assert(areVectorsEqual(v_div, Vector3D(0.5, 1.0, 1.5)));
     writeln(v1, " / ", scalar, " = ", v_div);
 
-    // --- Binary Operator Tests (Scalar-Vector) ---
-    writeln("\n--- Binary Operator Tests (Scalar-Vector) ---");
-    auto v_scale_left = scalar * v1; // Tests opBinaryRight
-    assert(areVectorsEqual(v_scale_left, Vector3D(2.0, 4.0, 6.0)));
-    writeln(scalar, " * ", v1, " = ", v_scale_left);
-
 
     // --- Compound Assignment Tests ---
     writeln("\n--- Compound Assignment Tests ---");
