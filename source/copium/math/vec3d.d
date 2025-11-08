@@ -115,8 +115,4 @@ public struct Vector3D
         );
     }
 
-    // Provides string representation for easy printing
-    public override string toString() const {
-        return "Vector3D(" ~ x.to!string ~ ", " ~ y.to!string ~ ", " ~ z.to!string ~ ")";
-    }
 }
