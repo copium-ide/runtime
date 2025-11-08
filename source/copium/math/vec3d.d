@@ -16,7 +16,7 @@ public struct Vector3D
     }
 
     // operator overloading for binary operations (e.g., v1 + v2, v1 - v2, v1 * v2, v1 / v2)
-    Vector3D opBinary(string op)(Vector3D rhs) const {
+    public Vector3D opBinary(string op)(Vector3D rhs) const {
         static if (op == "+" || op == "-" || op == "*" || op == "/") {
             return mixin("Vector3D(x " ~ op ~ " rhs.x, y " ~ op ~ " rhs.y, z " ~ op ~ " rhs.z)");
         } else {
@@ -25,7 +25,7 @@ public struct Vector3D
     }
 
     // Operator overloading for scalar multiplication/division (e.g., v * 2.0, v / 2.0)
-    Vector3D opBinary(string op)(double scalar) const {
+    public Vector3D opBinary(string op)(double scalar) const {
         static if (op == "*" || op == "/") {
             return mixin("Vector3D(x " ~ op ~ " scalar, y " ~ op ~ " scalar, z " ~ op ~ " scalar)");
         } else {
@@ -34,7 +34,7 @@ public struct Vector3D
     }
     
     // Operator overloading for scalar multiplication where the scalar is on the left (e.g., 2.0 * v)
-    static Vector3D opBinaryRight(string op)(double scalar, Vector3D rhs) {
+    public static Vector3D opBinaryRight(string op)(double scalar, Vector3D rhs) {
         static if (op == "*") {
             return Vector3D(scalar * rhs.x, scalar * rhs.y, scalar * rhs.z);
         } else {
@@ -43,7 +43,7 @@ public struct Vector3D
     }
 
     // Operator overloading for unary operations (e.g., -v)
-    Vector3D opUnary(string op)() const {
+    public Vector3D opUnary(string op)() const {
         static if (op == "-") {
             return Vector3D(-x, -y, -z);
         }
@@ -55,7 +55,7 @@ public struct Vector3D
     }
 
     // Compound assignment operators (e.g., v1 += v2)
-    Vector3D opOpAssign(string op)(Vector3D rhs) {
+    public Vector3D opOpAssign(string op)(Vector3D rhs) {
         static if (op == "+" || op == "-" || op == "*" || op == "/") {
             mixin("x " ~ op ~ "= rhs.x;");
             mixin("y " ~ op ~ "= rhs.y;");
@@ -67,7 +67,7 @@ public struct Vector3D
     }
 
     // Compound assignment operators with a scalar (e.g., v += 2.0)
-    Vector3D opOpAssign(string op)(double scalar) {
+    public Vector3D opOpAssign(string op)(double scalar) {
         static if (op == "+" || op == "-" || op == "*" || op == "/") {
             mixin("x " ~ op ~ "= scalar;");
             mixin("y " ~ op ~ "= scalar;");
@@ -82,17 +82,17 @@ public struct Vector3D
     // methods
 
     // Magnitude (length) of the vector
-    @property double length() const {
+    @property public double length() const {
         return sqrt(x*x + y*y + z*z);
     }
 
     // Magnitude squared (useful for comparisons without expensive sqrt)
-    @property double lengthSquared() const {
+    @property public double lengthSquared() const {
         return x*x + y*y + z*z;
     }
 
     // Normalizes the vector to a unit vector (length of 1)
-    Vector3D normalized() const {
+    public Vector3D normalized() const {
         double len = length();
         // Handle the zero vector case to avoid division by zero
         if (fabs(len) < 1e-9) {
@@ -102,12 +102,12 @@ public struct Vector3D
     }
 
     // Dot product with another vector
-    double dot(Vector3D rhs) const {
+    public double dot(Vector3D rhs) const {
         return x*rhs.x + y*rhs.y + z*rhs.z;
     }
 
     // Cross product with another vector (only in 3D)
-    Vector3D cross(Vector3D rhs) const {
+    public Vector3D cross(Vector3D rhs) const {
         return Vector3D(
             y * rhs.z - z * rhs.y,
             z * rhs.x - x * rhs.z,
@@ -116,7 +116,7 @@ public struct Vector3D
     }
 
     // Provides string representation for easy printing
-    override string toString() const {
+    public override string toString() const {
         return "Vector3D(" ~ x.to!string ~ ", " ~ y.to!string ~ ", " ~ z.to!string ~ ")";
     }
 }
