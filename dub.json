@@ -9,5 +9,5 @@
 	"dependencies": { 
     },
     "targetPath": "bin",
-	"targetType": "dynamicLibrary"
+	"targetType": "library"
 }
