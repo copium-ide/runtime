@@ -7,7 +7,7 @@
 	"license": "GPL-3.0-or-later",
 	"name": "vecmath",
 	"dependencies": {
-		"runtime": {"repository": "git+https://github.com/copium-ide/runtime.git", "version": "be7ff5c"}
+		"runtime": {"path": "../../"}
     },
     "targetPath": "bin",
 	"targetType": "executable",
