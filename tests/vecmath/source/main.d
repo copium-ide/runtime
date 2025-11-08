@@ -1,4 +1,4 @@
-module tests.vecmath.main;
+module main;
 
 import std.stdio;
 import std.math : approxEqual;
