@@ -8,7 +8,7 @@ public struct Vector2D
     double y;
 
     // call as Vector2D(x,y)
-    this(double x, double y) {
+    this(double x = 0.0, double y = 0.0) {
         this.x = x;
         this.y = y;
     }
