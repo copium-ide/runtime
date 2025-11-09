@@ -10,7 +10,7 @@ public struct Vector3D
 
     // call as Vector3d(x,y,z)
     this(double x, double y, double z) {
-        if (x == nan || y == nan || z == nan) {
+        if (x == double.nan || y == double.nan || z == double.nan) {
             this.x = 0;
             this.y = 0;
             this.z = 0;

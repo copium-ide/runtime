@@ -9,7 +9,7 @@ public struct Vector2D
 
     // call as Vector2D(x,y)
     this(double x, double y) {
-        if (x == nan || y == nan) {
+        if (x == double.nan || y == double.nan) {
             this.x = 0;
             this.y = 0;
         } else {
