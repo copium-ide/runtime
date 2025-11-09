@@ -8,7 +8,7 @@ public struct Vector3D
     double y;
     double z;
 
-    // call as new Vector3d(x,y,z)
+    // call as Vector3d(x,y,z)
     this(double x, double y, double z) {
         this.x = x;
         this.y = y;
@@ -24,14 +24,6 @@ public struct Vector3D
         }
     }
 
-    // Operator overloading for scalar multiplication/division (e.g., v * 2.0, v / 2.0)
-    public Vector3D opBinary(string op)(double scalar) const {
-        static if (op == "*" || op == "/") {
-            return mixin("Vector3D(x " ~ op ~ " scalar, y " ~ op ~ " scalar, z " ~ op ~ " scalar)");
-        } else {
-            static assert(0, "Operator " ~ op ~ " not implemented for Vector3D with scalar");
-        }
-    }
 
     // Operator overloading for unary operations (e.g., -v)
     public Vector3D opUnary(string op)() const {

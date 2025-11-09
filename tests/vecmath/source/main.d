@@ -40,15 +40,6 @@ void main()
     auto v_mul = v1 * v2;
     writeln(v1, " * ", v2, " (component-wise) = ", v_mul);
     
-    // --- Binary Operator Tests (Vector-Scalar) ---
-    writeln("\n--- Binary Operator Tests (Vector-Scalar) ---");
-    double scalar = 2.0;
-    auto v_scale = v1 * scalar;
-    writeln(v1, " * ", scalar, " = ", v_scale);
-
-    auto v_div = v1 / scalar;
-    writeln(v1, " / ", scalar, " = ", v_div);
-
 
     // --- Compound Assignment Tests ---
     writeln("\n--- Compound Assignment Tests ---");
