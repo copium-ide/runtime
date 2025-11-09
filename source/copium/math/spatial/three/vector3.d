@@ -9,10 +9,16 @@ public struct Vector3D
     double z;
 
     // call as Vector3d(x,y,z)
-    this(double x = 0.0, double y = 0.0, double z = 0.0) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    this(double x, double y, double z) {
+        if (x == nan || y == nan || z == nan) {
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
+        } else {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
     }
 
     // operator overloading for binary operations (e.g., v1 + v2, v1 - v2, v1 * v2, v1 / v2)

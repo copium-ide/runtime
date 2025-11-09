@@ -8,9 +8,14 @@ public struct Vector2D
     double y;
 
     // call as Vector2D(x,y)
-    this(double x = 0.0, double y = 0.0) {
-        this.x = x;
-        this.y = y;
+    this(double x, double y) {
+        if (x == nan || y == nan) {
+            this.x = 0;
+            this.y = 0;
+        } else {
+            this.x = x;
+            this.y = y;
+        }
     }
 
     // operator overloading for binary operations (e.g., v1 + v2, v1 - v2, v1 * v2, v1 / v2)
