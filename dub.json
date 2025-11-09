@@ -8,6 +8,9 @@
 	"name": "runtime",
 	"dependencies": { 
     },
+	"subConfigurations": {
+        "bindbc-vulkan": "static"
+    },
     "targetPath": "bin",
 	"targetType": "library"
 }
