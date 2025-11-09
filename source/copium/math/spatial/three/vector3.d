@@ -9,7 +9,7 @@ public struct Vector3D
     double z;
 
     // call as Vector3d(x,y,z)
-    this(double x, double y, double z) {
+    this(double x = 0.0, double y = 0.0, double z = 0.0) {
         this.x = x;
         this.y = y;
         this.z = z;
