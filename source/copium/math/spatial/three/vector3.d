@@ -1,4 +1,4 @@
-module copium.math.vec3d;
+module copium.math.spatial.three.vector3;
 
 import std.math : sqrt, fabs;
 
