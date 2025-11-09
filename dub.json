@@ -7,9 +7,10 @@
 	"license": "GPL-3.0-or-later",
 	"name": "runtime",
 	"dependencies": { 
+		"bindbc-vulkan": "~1.0.0"
     },
 	"subConfigurations": {
-        "bindbc-vulkan": "static"
+        "bindbc-vulkan": "dynamic"
     },
     "targetPath": "bin",
 	"targetType": "library"
