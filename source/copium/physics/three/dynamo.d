@@ -6,6 +6,7 @@ import copium.rendering.window : deltaTime;
 public struct Dynamo
 {
     // Trying to go for XPBD type shii... wish me luck lmao
+    // TODO: This structure is highly inefficient for memory. it is better to make direct modifications to the state instead of duplicating it each time.
     Dscene solve(Dscene scene, int iterations) {
         foreach(DScene.MaterialBody mbody; scene.mbodies) {
             foreach(Dscene.MaterialBody.NodeGroup ngroup; mbody.ngroups) {
