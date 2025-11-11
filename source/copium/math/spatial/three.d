@@ -1,64 +1,69 @@
-module copium.math.spatial.three.vector2;
+module copium.math.spatial.three;
 
 import std.math : sqrt, fabs;
 
-public struct Vector2D
+public struct Vector3D
 {
     double x;
     double y;
+    double z;
 
-    // call as Vector2D(x,y)
-    this(double x, double y) {
-        if (x == double.nan || y == double.nan) {
+    // call as Vector3d(x,y,z)
+    this(double x, double y, double z) {
+        if (x == double.nan || y == double.nan || z == double.nan) {
             this.x = 0;
             this.y = 0;
+            this.z = 0;
         } else {
             this.x = x;
             this.y = y;
+            this.z = z;
         }
     }
 
     // operator overloading for binary operations (e.g., v1 + v2, v1 - v2, v1 * v2, v1 / v2)
-    public Vector2D opBinary(string op)(Vector2D rhs) const {
+    public Vector3D opBinary(string op)(Vector3D rhs) const {
         static if (op == "+" || op == "-" || op == "*" || op == "/") {
-            return mixin("Vector2D(x " ~ op ~ " rhs.x, y " ~ op ~ " rhs.y");
+            return mixin("Vector3D(x " ~ op ~ " rhs.x, y " ~ op ~ " rhs.y, z " ~ op ~ " rhs.z)");
         } else {
-            static assert(0, "Operator " ~ op ~ " not implemented for Vector2D");
+            static assert(0, "Operator " ~ op ~ " not implemented for Vector3D");
         }
     }
 
 
     // Operator overloading for unary operations (e.g., -v)
-    public Vector2D opUnary(string op)() const {
+    public Vector3D opUnary(string op)() const {
         static if (op == "-") {
-            return Vector2D(-x, -y);
+            return Vector3D(-x, -y, -z);
         }
         else static if (op == "+") {
             return this;
         } else {
-            static assert(0, "Unary operator " ~ op ~ " not implemented for Vector2D");
+            static assert(0, "Unary operator " ~ op ~ " not implemented for Vector3D");
         }
     }
 
     // Compound assignment operators (e.g., v1 += v2)
-    public Vector2D opOpAssign(string op)(Vector2D rhs) {
+    public Vector3D opOpAssign(string op)(Vector3D rhs) {
         static if (op == "+" || op == "-" || op == "*" || op == "/") {
             mixin("x " ~ op ~ "= rhs.x;");
             mixin("y " ~ op ~ "= rhs.y;");
+            mixin("z " ~ op ~ "= rhs.z;");
             return this;
         } else {
-            static assert(0, "Compound operator " ~ op ~ "= not implemented for Vector2D");
+            static assert(0, "Compound operator " ~ op ~ "= not implemented for Vector3D");
         }
     }
 
     // Compound assignment operators with a scalar (e.g., v += 2.0)
-    public Vector2D opOpAssign(string op)(double scalar) {
+    public Vector3D opOpAssign(string op)(double scalar) {
         static if (op == "+" || op == "-" || op == "*" || op == "/") {
             mixin("x " ~ op ~ "= scalar;");
             mixin("y " ~ op ~ "= scalar;");
+            mixin("z " ~ op ~ "= scalar;");
             return this;
         } else {
-            static assert(0, "Compound operator " ~ op ~ "= not implemented for Vector2D with scalar");
+            static assert(0, "Compound operator " ~ op ~ "= not implemented for Vector3D with scalar");
         }
     }
 
@@ -67,27 +72,36 @@ public struct Vector2D
 
     // Magnitude (length) of the vector
     @property public double length() const {
-        return sqrt(x*x + y*y);
+        return sqrt(x*x + y*y + z*z);
     }
 
     // Magnitude squared (useful for comparisons without expensive sqrt)
     @property public double lengthSquared() const {
-        return x*x + y*y;
+        return x*x + y*y + z*z;
     }
 
     // Normalizes the vector to a unit vector (length of 1)
-    public Vector2D normalized() const {
+    public Vector3D normalized() const {
         double len = length();
         // Handle the zero vector case to avoid division by zero
         if (fabs(len) < 1e-9) {
-            return Vector2D(0, 0);
+            return Vector3D(0, 0, 0);
         }
-        return Vector2D(x / len, y / len);
+        return Vector3D(x / len, y / len, z / len);
     }
 
     // Dot product with another vector
-    public double dot(Vector2D rhs) const {
-        return x*rhs.x + y*rhs.y;
+    public double dot(Vector3D rhs) const {
+        return x*rhs.x + y*rhs.y + z*rhs.z;
+    }
+
+    // Cross product with another vector (only in 3D)
+    public Vector3D cross(Vector3D rhs) const {
+        return Vector3D(
+            y * rhs.z - z * rhs.y,
+            z * rhs.x - x * rhs.z,
+            x * rhs.y - y * rhs.x
+        );
     }
 
 }
