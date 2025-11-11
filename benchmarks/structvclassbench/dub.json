@@ -1,0 +1,15 @@
+{
+	"authors": [
+		"halu"
+	],
+	"copyright": "Copyright © 2025, halu",
+	"description": "struct vs class benchmark",
+	"license": "GPL-3.0-or-later",
+	"name": "structvclassbench",
+	"dependencies": {
+		"runtime": {"path": "../../"}
+    },
+    "targetPath": "bin",
+	"targetType": "executable",
+    "targetName": "structvclassbench"
+}
