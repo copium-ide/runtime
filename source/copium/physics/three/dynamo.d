@@ -1,6 +1,6 @@
 module copium.physics.three.dynamo;
 /// Dynamo physics engine
-import copium.math.spatial.three.vector3;
+import copium.math.spatial.three : Vector3D;
 import copium.rendering.window : deltaTime;
 
 public struct Dynamo

@@ -2,7 +2,7 @@ module main;
 
 import std.stdio;
 import std.math : isClose;
-import copium.math.spatial.three.vector3;
+import copium.math.spatial.three : Vector3D;
 
 // Helper function to check if two vectors are approximately equal
 bool areVectorsEqual(Vector3D v1, Vector3D v2, double tolerance = 1e-9) {
