@@ -1,0 +1,11 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"bindbc-common": "1.0.5",
+		"bindbc-loader": "1.1.5",
+		"bindbc-sdl": "2.2.2",
+		"d-vulkan": "0.3.1",
+		"derelict-util": "2.0.6",
+		"runtime": {"path":"../../"}
+	}
+}
