@@ -3,7 +3,7 @@
 		"halu"
 	],
 	"copyright": "Copyright © 2025, halu",
-	"description": "gui for copium ide",
+	"description": "vecmath test",
 	"license": "GPL-3.0-or-later",
 	"name": "vecmath",
 	"dependencies": {
