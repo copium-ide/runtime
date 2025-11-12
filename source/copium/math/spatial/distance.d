@@ -53,7 +53,7 @@ struct Distance(string name, double factor)
     }
 }
 
-// Instantiate specific distance types:
+// Instantiate specific unit types:
 alias Meter = Distance!("m", 1.0); /// Meters
 alias Kilometer = Distance!("km", 1_000.0); /// Kilometers
 alias Mile = Distance!("mi", 1_609.34); /// Miles
