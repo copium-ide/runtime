@@ -3,13 +3,13 @@
 		"halu"
 	],
 	"copyright": "Copyright © 2025, halu",
-	"description": "distancetest",
+	"description": "testing of the measurement system",
 	"license": "GPL-3.0-or-later",
-	"name": "distancetest",
+	"name": "measurement",
 	"dependencies": {
 		"runtime": {"path": "../../"}
     },
     "targetPath": "bin",
 	"targetType": "executable",
-    "targetName": "distancetest"
+    "targetName": "measurement"
 }
