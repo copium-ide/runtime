@@ -1,4 +1,4 @@
-module copium.math.spatial.three;
+module copium.math.vectors.three;
 
 import std.math : sqrt, fabs;
 import std.stdio : writeln; // Added for the example usage
@@ -93,16 +93,16 @@ public struct Vector3D {
     // methods
     // Magnitude (length) of the vector
     @property public double length() const {
-        return sqrt(x*x + y*y + z*z);
+        return sqrt(x * x + y * y + z * z);
     }
 
     // Magnitude squared (useful for comparisons without expensive sqrt)
     @property public double lengthSquared() const {
-        return x*x + y*y + z*z;
+        return x * x + y * y + z * z;
     }
 
     // Normalizes the vector to a unit vector (length of 1)
-    public Vector3D normalized() const {
+    public Vector3D normalize() const {
         double len = length();
         // Handle the zero vector case to avoid division by zero
         if (fabs(len) < 1e-9) {
@@ -110,25 +110,26 @@ public struct Vector3D {
         }
         return Vector3D(x / len, y / len, z / len);
     }
-
-    // Dot product with another vector
-    public double dot(Vector3D rhs) const {
-        return x*rhs.x + y*rhs.y + z*rhs.z;
-    }
-
-    // Cross product with another vector (only in 3D)
-    public Vector3D cross(Vector3D rhs) const {
-        return Vector3D(
-            y * rhs.z - z * rhs.y,
-            z * rhs.x - x * rhs.z,
-            x * rhs.y - y * rhs.x
-        );
-    }
 }
 
-// Example usage that caused the error (in source/main.d)
-void main() {
-    Vector3D vector = Vector3D(1, 2, 3);
-    // This now works because opBinaryRight is correctly defined
-    writeln("scalar * vector: ", 2 * vector);
+/// Distance between vectors
+public double distance(Vector3D lhs, Vector3D rhs) {
+    double dx = lhs.x - rhs.x;
+    double dy = lhs.y - rhs.y;
+    double dz = lhs.z - rhs.z;
+    return sqrt(dx*dx + dy*dy + dz*dz);
+}
+
+/// Dot product with another vector
+public double dot(Vector3D lhs, Vector3D rhs) {
+    return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
+}
+
+/// Cross product with another vector (only in 3D)
+public Vector3D cross(Vector3D lhs, Vector3D rhs) {
+    return Vector3D(
+        lhs.y * rhs.z - lhs.z * rhs.y,
+        lhs.z * rhs.x - lhs.x * rhs.z,
+        lhs.x * rhs.y - lhs.y * rhs.x
+    );
 }
