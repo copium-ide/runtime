@@ -1,0 +1,15 @@
+{
+	"authors": [
+		"halu"
+	],
+	"copyright": "Copyright © 2025, halu",
+	"description": "distancetest",
+	"license": "GPL-3.0-or-later",
+	"name": "distancetest",
+	"dependencies": {
+		"runtime": {"path": "../../"}
+    },
+    "targetPath": "bin",
+	"targetType": "executable",
+    "targetName": "distancetest"
+}
