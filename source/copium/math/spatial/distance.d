@@ -19,32 +19,32 @@ struct Distance(string name, double factor)
     }
 
     // Method to convert the local value into the common base unit value (Meters)
-    double toMeters() const
+    double toBaseUnit() const
     {
         return this.value * factor;
     }
 
-    // Method to convert a meter value back into (this) local unit
-    static auto fromMeters(double meters)
+    // Method to convert a BaseUnit value back into (this) local unit
+    static auto fromBaseUnit(double value)
     {
-        return typeof(this)(meters / factor);
+        return typeof(this)(value / factor);
     }
 
-    // Overload binary operators for Distance types. Converts both operands to meters, performs the operation, and returns the result converted back to the left-hand side's type (this).
+    // Overload binary operators for Distance types. Converts both operands to BaseUnit, performs the operation, and returns the result converted back to the left-hand side's type (this).
     auto opBinary(string op, T2)(T2 rhs)
         if (is(T2 == Distance!U2, U2...)) // Constraint on the RHS type
     {
         static if (op == "+" || op == "-" || op == "*" || op == "/")
         {
-            double rhsMeters = rhs.toMeters();
-            double lhsMeters = this.toMeters();
-            double resultInMeters;
+            double rhsBaseUnit = rhs.toBaseUnit();
+            double lhsBaseUnit = this.toBaseUnit();
+            double resultInBaseUnit;
 
             // Use a mixin to inject the actual operator at compile time
-            mixin(`resultInMeters = lhsMeters ` ~ op ~ ` rhsMeters;`);
+            mixin(`resultInBaseUnit = lhsBaseUnit ` ~ op ~ ` rhsBaseUnit;`);
 
             // Convert the resulting meter value back into the same type of (this)
-            return this.fromMeters(resultInMeters);
+            return this.fromBaseUnit(resultInBaseUnit);
         }
         else
         {
