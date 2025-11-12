@@ -88,6 +88,6 @@ struct SolidBody
 struct LiquidBody
 {
     // Outline: simulates at increasing resolution the closer it is to a solid body.
-    double minimumResolution = metersInCentimeter/10;
-    double maximumResolution = meter*50;
+    auto minimumResolution = Centimeter(1/10);
+    auto maximumResolution = Meter(50);
 }
