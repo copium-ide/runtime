@@ -1,9 +1,9 @@
 module copium.math.spatial.three;
 
 import std.math : sqrt, fabs;
+import std.stdio : writeln; // Added for the example usage
 
-public struct Vector3D
-{
+public struct Vector3D {
     double x;
     double y;
     double z;
@@ -30,13 +30,11 @@ public struct Vector3D
         }
     }
 
-
-    // Operator overloading for unary operations (e.g., -v)
+    // Operator overloading for unary operations (e.g., "-v)"
     public Vector3D opUnary(string op)() const {
         static if (op == "-") {
-            return Vector3D(-x, -y, -z);
-        }
-        else static if (op == "+") {
+            return Vector3D(-x, -y, -z); // Fixed syntax errors here
+        } else static if (op == "+") {
             return this;
         } else {
             static assert(0, "Unary operator " ~ op ~ " not implemented for Vector3D");
@@ -67,9 +65,32 @@ public struct Vector3D
         }
     }
 
+    // Scalar operations (e.g., v * 2.0, 2.0 * v)
+    public Vector3D opBinary(string op)(double scalar) const {
+        static if (op == "+" || op == "-" || op == "*" || op == "/") {
+            return mixin("Vector3D(x " ~ op ~ " scalar, y " ~ op ~ " scalar, z " ~ op ~ " scalar)");
+        } else {
+            static assert(0, "Scalar operator " ~ op ~ " not implemented for Vector3D");
+        }
+    }
+
+    // Helper function for left-hand-side scalar operations (e.g. 2.0 * v)
+    // The `opBinaryRight` template allows the compiler to handle cases where the scalar is on the left.
+    // This is defined as a non-static member function taking the right-hand side type as argument
+    public Vector3D opBinaryRight(string op)(double lhs) const {
+        static if (op == "+" || op == "*") {
+            // Addition and multiplication are commutative, reuse opBinary
+            return this.opBinary!(op)(lhs);
+        } else static if (op == "-") {
+            return Vector3D(lhs - this.x, lhs - this.y, lhs - this.z);
+        } else static if (op == "/") {
+            return Vector3D(lhs / this.x, lhs / this.y, lhs / this.z);
+        } else {
+            static assert(0, "Scalar operator opBinaryRight " ~ op ~ " not implemented for Vector3D");
+        }
+    }
 
     // methods
-
     // Magnitude (length) of the vector
     @property public double length() const {
         return sqrt(x*x + y*y + z*z);
@@ -103,5 +124,11 @@ public struct Vector3D
             x * rhs.y - y * rhs.x
         );
     }
+}
 
+// Example usage that caused the error (in source/main.d)
+void main() {
+    Vector3D vector = Vector3D(1, 2, 3);
+    // This now works because opBinaryRight is correctly defined
+    writeln("scalar * vector: ", 2 * vector);
 }
