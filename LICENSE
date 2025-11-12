@@ -2,6 +2,10 @@ Copium Custom License 1.0 (hereby CCL)
 Author: Halufun
 
 Definitions:
+- Commercial use:
+Distribution where the user must pay a fee to access a part or whole of the distributed software, including compiled binaries generated from the source code.
+- Non commercial use:
+The entirety of the distributed software is accessible without fee. Optional donation prompts are allowed.
 - Software:
 Any software licensed under CCL 1.0
 - Natural Person:
