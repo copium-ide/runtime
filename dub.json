@@ -10,7 +10,12 @@
 		"bindbc-sdl": "~>2.0"
     },
 	"subConfigurations": {
-    },
+	"bindbc-sdl": "staticBC"
+	},
+	"libs": [
+	"SDL3"
+	],
+
     "targetPath": "bin",
 	"targetType": "library"
 }
