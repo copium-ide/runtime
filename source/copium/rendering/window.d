@@ -9,7 +9,7 @@ import core.stdc.config;
 public enum float fps = 60;
 public enum float deltaTime = 1/fps;
 
-void init() {
+static this() {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0) {
         writeln("Failed to initialize SDL: ", SDL_GetError());
         return;
