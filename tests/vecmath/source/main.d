@@ -2,7 +2,7 @@ module main;
 
 import std.stdio;
 import std.math : isClose;
-import copium.math.vectors.three : Vector3D;
+import copium.math.spatial.vector_3;
 
 // Helper function to check if two vectors are approximately equal
 bool areVectorsEqual(Vector3D v1, Vector3D v2, double tolerance = 1e-9) {
@@ -58,13 +58,14 @@ void main()
 
     writeln(v4, " length = ", v4.length);
 
-    auto unit_v4 = v4.normalized();
+
+    auto unit_v4 = v4.normalize();
     writeln(v4, " normalized = ", unit_v4);
 
-    double dot_prod = v1.dot(v2);
+    double dot_prod = dot(v1, v2);
     writeln("Dot product of ", v1, " and ", v2, " = ", dot_prod);
 
-    auto cross_prod = v1.cross(Vector3D(1.0, 0.0, 0.0));
+    auto cross_prod = cross(v1, Vector3D(1.0, 0.0, 0.0));
     writeln("Cross product of ", v1, " and (1,0,0) = ", cross_prod);
 
     Vector3D vector = Vector3D(1,1,1);
