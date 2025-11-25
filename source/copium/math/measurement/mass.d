@@ -18,7 +18,7 @@ struct Mass(string name, double factor)
         return format("%.2f%s", this.value, name);
     }
 
-    // Method to convert the local value into the common base unit value (newton)
+    // Method to convert the local value into the common base unit value
     double toBaseUnit() const
     {
         return this.value * factor;
