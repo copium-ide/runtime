@@ -8,6 +8,7 @@ import core.stdc.config;
 
 public enum float fps = 60;
 public enum float deltaTime = 1/fps;
+public bool shouldQuit = false;
 
 static this() {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0) {
@@ -47,6 +48,7 @@ void createWindow(string title, int w, int h){
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_EVENT_QUIT) {
                 running = false;
+                shouldQuit = true;
             }
         }
         // Set drawing color to blue

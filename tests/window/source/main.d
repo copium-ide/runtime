@@ -1,9 +1,12 @@
 module main;
 
 import std.stdio;
-import copium.rendering.window;
+import window = copium.rendering.window;
 
 void main(){
-    createWindow("bingus", 500, 500);
-    quit();
+    window.createWindow("bingus", 500, 500);
+    while (!window.shouldQuit){
+        
+    }
+    window.quit();
 }
