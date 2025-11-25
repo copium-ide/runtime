@@ -1,10 +1,10 @@
-module copium.math.spatial.force;
+module copium.math.measurement.speed;
 
 import std.traits : isFloatingPoint, ReturnType;
 import std.format : format;
 
-/// Universal force struct
-struct Force(string name, double factor)
+/// Universal Speed struct
+struct Speed(string name, double factor)
 {
     double value;
 
@@ -30,9 +30,9 @@ struct Force(string name, double factor)
         return typeof(this)(value / factor);
     }
 
-    // Overload binary operators for Distance types. Converts both operands to the base unit, performs the operation, and returns the result converted back to the left-hand side's type (this).
+    // Overload binary operators for Speed types. Converts both operands to the base unit, performs the operation, and returns the result converted back to the left-hand side's type (this).
     auto opBinary(string op, T2)(T2 rhs)
-        if (is(T2 == Distance!U2, U2...)) // Constraint on the RHS type
+        if (is(T2 == Speed!U2, U2...)) // Constraint on the RHS type
     {
         static if (op == "+" || op == "-" || op == "*" || op == "/")
         {
@@ -54,5 +54,5 @@ struct Force(string name, double factor)
 }
 
 // Instantiate specific unit types:
-alias Newton = Force!("N", 1.0); /// Newtons
-alias Kilonewton = Force!("kN", 1_000.0); /// KiloNewtons
+// These should all resolve down to how many meters per second they are.
+alias MetersPerSecond = Speed!("m/s", 1.0);

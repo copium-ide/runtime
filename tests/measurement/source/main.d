@@ -1,7 +1,7 @@
 module main;
 
 import std.stdio;
-import copium.math.spatial.distance;
+import copium.math.measurement.distance;
 
 void main() {
     auto d1 = Kilometer(10.0);

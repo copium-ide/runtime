@@ -1,10 +1,10 @@
-module copium.math.spatial.distance;
+module copium.math.measurement.force;
 
 import std.traits : isFloatingPoint, ReturnType;
 import std.format : format;
 
-/// Universal distance struct
-struct Distance(string name, double factor)
+/// Universal force struct
+struct Force(string name, double factor)
 {
     double value;
 
@@ -18,19 +18,19 @@ struct Distance(string name, double factor)
         return format("%.2f%s", this.value, name);
     }
 
-    // Method to convert the local value into the common base unit value (Meters)
+    // Method to convert the local value into the common base unit value (newton)
     double toBaseUnit() const
     {
         return this.value * factor;
     }
 
-    // Method to convert a BaseUnit value back into (this) local unit
+    // Method to convert a meter value back into (this) local unit
     static auto fromBaseUnit(double value)
     {
         return typeof(this)(value / factor);
     }
 
-    // Overload binary operators for Distance types. Converts both operands to BaseUnit, performs the operation, and returns the result converted back to the left-hand side's type (this).
+    // Overload binary operators for Distance types. Converts both operands to the base unit, performs the operation, and returns the result converted back to the left-hand side's type (this).
     auto opBinary(string op, T2)(T2 rhs)
         if (is(T2 == Distance!U2, U2...)) // Constraint on the RHS type
     {
@@ -43,7 +43,7 @@ struct Distance(string name, double factor)
             // Use a mixin to inject the actual operator at compile time
             mixin(`resultInBaseUnit = lhsBaseUnit ` ~ op ~ ` rhsBaseUnit;`);
 
-            // Convert the resulting meter value back into the same type of (this)
+            // Convert the resulting newton value back into the same type of (this)
             return this.fromBaseUnit(resultInBaseUnit);
         }
         else
@@ -54,7 +54,5 @@ struct Distance(string name, double factor)
 }
 
 // Instantiate specific unit types:
-alias Meter = Distance!("m", 1.0); /// Meters
-alias Kilometer = Distance!("km", 1_000.0); /// Kilometers
-alias Mile = Distance!("mi", 1_609.34); /// Miles
-alias Centimeter = Distance!("cm", 0.01); /// Centimeters
+alias Newton = Force!("N", 1.0); /// Newtons
+alias Kilonewton = Force!("kN", 1_000.0); /// KiloNewtons
