@@ -1,4 +1,4 @@
-module copium.math.spatial.two;
+module copium.math.spatial.vector_2;
 
 import std.math : sqrt, fabs;
 
@@ -8,7 +8,7 @@ public struct Vector2D
     double y;
 
     // call as Vector2D(x,y)
-    this(double x, double y)
+    @nogc this(double x, double y)
     {
         if (x == double.nan || y == double.nan)
         {
@@ -23,7 +23,7 @@ public struct Vector2D
     }
 
     // operator overloading for binary operations (e.g., v1 + v2, v1 - v2, v1 * v2, v1 / v2)
-    public Vector2D opBinary(string op)(Vector2D rhs) const
+    @nogc public Vector2D opBinary(string op)(Vector2D rhs) const
     {
         static if (op == "+" || op == "-" || op == "*" || op == "/")
         {
@@ -36,7 +36,7 @@ public struct Vector2D
     }
 
     // Scalar operations (e.g., v * 2.0, v + 2.0)
-    public Vector2D opBinary(string op)(double scalar) const
+    @nogc public Vector2D opBinary(string op)(double scalar) const
     {
         static if (op == "+" || op == "-" || op == "*" || op == "/")
         {
@@ -49,7 +49,7 @@ public struct Vector2D
     }
 
     // Helper function for left-hand-side scalar operations (e.g. 2.0 * v)
-    public Vector2D opBinaryRight(string op)(double lhs) const
+    @nogc public Vector2D opBinaryRight(string op)(double lhs) const
     {
         static if (op == "+" || op == "*")
         {
@@ -71,7 +71,7 @@ public struct Vector2D
     }
 
     // Operator overloading for unary operations (e.g., -v)
-    public Vector2D opUnary(string op)() const
+    @nogc public Vector2D opUnary(string op)() const
     {
         static if (op == "-")
         {
@@ -88,7 +88,7 @@ public struct Vector2D
     }
 
     // Compound assignment operators (e.g., v1 += v2)
-    public Vector2D opOpAssign(string op)(Vector2D rhs)
+    @nogc public Vector2D opOpAssign(string op)(Vector2D rhs)
     {
         static if (op == "+" || op == "-" || op == "*" || op == "/")
         {
@@ -103,7 +103,7 @@ public struct Vector2D
     }
 
     // Compound assignment operators with a scalar (e.g., v += 2.0)
-    public Vector2D opOpAssign(string op)(double scalar)
+    @nogc public Vector2D opOpAssign(string op)(double scalar)
     {
         static if (op == "+" || op == "-" || op == "*" || op == "/")
         {
@@ -120,19 +120,19 @@ public struct Vector2D
     // methods
 
     // Magnitude (length) of the vector
-    @property public double length() const
+    @nogc @property public double length() const
     {
         return sqrt(x * x + y * y);
     }
 
     // Magnitude squared (useful for comparisons without expensive sqrt)
-    @property public double lengthSquared() const
+    @nogc @property public double lengthSquared() const
     {
         return x * x + y * y;
     }
 
     // Normalizes the vector to a unit vector (length of 1)
-    public Vector2D normalized() const
+    @nogc public Vector2D normalized() const
     {
         double len = length();
         // Handle the zero vector case to avoid division by zero
@@ -144,7 +144,7 @@ public struct Vector2D
     }
 
     // Dot product with another vector
-    public double dot(Vector2D rhs) const
+    @nogc public double dot(Vector2D rhs) const
     {
         return x * rhs.x + y * rhs.y;
     }
