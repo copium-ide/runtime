@@ -59,14 +59,11 @@ private struct Matrix3x3 {
 }
 
 
-/// X is horizantal, Y is vertical, Z is depth
+/// X is horizantal, Y is vertical, Z is depth. Position and rotation are relative to the camera. What you see is what you get.
 @nogc Vector2D[] onePointProject(Vector3D[] world, Vector3D position, Vector3D rotation, Vector3D pointOfProjection){
-    Vector2D[] result; // Ensure the result array has the same size
+    Vector2D[] result;
 
-    // 1. Calculate the view matrix (rotation matrix for the camera)
-    // The camera rotation matrix is typically the inverse (transpose for orthogonal matrices) of the world rotation matrix.
-    // When applying it to points relative to the camera, we use the camera's orientation directly.
-    Matrix3x3 camRotationMatrix = createRotationMatrix(rotation);
+    Matrix3x3 camRotationMatrix = createRotationMatrix(rotation); // Matrix is based on the camera's rotation.
     
     // For a standard pinhole camera model, the point of projection defines the focal length.
     // The distance from the camera origin (0,0,0 after transformation) to the projection plane.
@@ -94,8 +91,7 @@ private struct Matrix3x3 {
             
             result[i] = Vector2D(screenX, screenY);
         } else {
-            // Point is behind the camera or on the projection plane, project to infinity or a specific value.
-            // Depending on the rendering pipeline, this might be clipped. Here we use a sentinel value.
+            // Point is directly in line with or behind camera. Send it to narnia.
             result[i] = Vector2D(double.nan, double.nan); 
         }
     }
