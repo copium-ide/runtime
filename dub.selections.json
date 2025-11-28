@@ -3,6 +3,14 @@
 	"versions": {
 		"bindbc-common": "1.0.5",
 		"bindbc-loader": "1.1.5",
-		"bindbc-sdl": "2.2.2"
+		"bindbc-sdl": "2.2.2",
+		"bindbc-thorvg": "1.0.1",
+		"cairod": "~master",
+		"derelict-ft": "1.0.2",
+		"derelict-util": "2.1.0",
+		"librsvg-d": "0.0.4",
+		"tinygltf": "1.1.0",
+		"windows-headers": "1.0.5",
+		"x11": "1.0.21"
 	}
 }

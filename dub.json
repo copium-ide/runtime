@@ -3,19 +3,19 @@
 		"halufun"
 	],
 	"copyright": "Copyright © 2025, halu",
+	"dependencies": {
+		"bindbc-sdl": "~>2.0",
+		"tinygltf": "~>1.1.0"
+	},
 	"description": "runtime for copium ide packaged exports",
+	"libs": [
+		"SDL3"
+	],
 	"license": "GPL-3.0-or-later",
 	"name": "runtime",
-	"dependencies": { 
-		"bindbc-sdl": "~>2.0"
-    },
 	"subConfigurations": {
-	"bindbc-sdl": "staticBC"
+		"bindbc-sdl": "staticBC"
 	},
-	"libs": [
-	"SDL3"
-	],
-
-    "targetPath": "bin",
+	"targetPath": "bin",
 	"targetType": "library"
 }
