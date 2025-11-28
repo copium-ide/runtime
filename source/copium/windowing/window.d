@@ -5,6 +5,7 @@ import std.stdio;
 import std.string;
 import std.conv;
 import core.stdc.config;
+import copium.c.string : toCString;
 
 public enum float fps = 60;
 public enum float deltaTime = 1 / fps;
@@ -16,7 +17,7 @@ struct Window
 {
     private SDL_Window* window;
     public bool closed = false;
-    this(string title, int x, int y, int w, int h, string[] flags)
+    @nogc this(string title, int x, int y, int w, int h, string[] flags)
     {
         if (SDL_WasInit(0) == 0)
         {
@@ -26,9 +27,8 @@ struct Window
         {
             SDL_InitSubSystem(SDL_INIT_VIDEO);
         }
-        writeln("Creating window.");
         this.window = SDL_CreateWindow(
-            toStringz(title),
+            toCString(title),
             w,
             h,
             SDL_WINDOW_RESIZABLE
@@ -37,17 +37,17 @@ struct Window
         SDL_SetWindowPosition(this.window, x, y);
     }
 
-    ~this()
+    @nogc ~this()
     {
         this.close();
     }
 
-    auto getWindowContext()
+    @nogc SDL_Window* getWindowContext()
     {
         return this.window;
     }
 
-    bool shouldClose()
+    @nogc bool shouldClose()
     {
         bool closeRequested = false;
 
@@ -61,11 +61,10 @@ struct Window
         return closeRequested;
     }
 
-    void close()
+    @nogc void close()
     {
         if (!closed && this.window != null)
         {
-            writeln("Closing window.");
             SDL_DestroyWindow(this.window);
             this.window = null;
             this.closed = true;
@@ -73,7 +72,7 @@ struct Window
     }
 }
 
-void pollEvents()
+@nogc void pollEvents()
 {
     SDL_PollEvent(&event);
 }
