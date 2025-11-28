@@ -28,8 +28,8 @@ struct Renderer
     }
 
     void render(){
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
+    SDL_RenderClear(this.renderer);
+    SDL_RenderPresent(this.renderer);
     }
 
     void editColor(ubyte r, ubyte b, ubyte g){
