@@ -1,6 +1,8 @@
 module copium.utils.array;
 
 import core.stdc.stdlib;
+import core.memory;
+import std.typecons : Nullable;
 
 struct Array(T)
 {
@@ -14,39 +16,52 @@ struct Array(T)
         {
             core.stdc.stdlib.free(ptr);
             ptr = null;
-            length = 0;
-            capacity = 0;
+            this.length = 0;
+            this.capacity = 0;
         }
     }
 
-    @nogc void append(T value)
+    @nogc bool append(T value)
     {
-        if (length == capacity)
+        if (this.length == capacity)
         {
             // Standard practice is to double capacity
             size_t newCapacity = capacity == 0 ? 4 : capacity * 2;
 
-            assert((ptr = cast(T*) realloc(ptr, newCapacity * T.sizeof)) !is null, "Out of memory");
+            if((ptr = cast(T*) realloc(ptr, newCapacity * T.sizeof)) !is null)
+            {
+                return false;
+            }
+            
             capacity = newCapacity;
         }
-        ptr[length] = value;
-        length++;
-    }
-
-    @nogc ref T opIndex(size_t index)
-    {
-        checkRange(index);
-        return ptr[index];
+        ptr[this.length] = value;
+        this.length++;
+        return true;
     }
 
     @nogc T opIndex(size_t index) const
     {
-        checkRange(index);
-        return ptr[index];
+        if(checkRange(index))
+        {
+            return ptr[index];
+        }
+        else
+        {
+            return typeof(return).init;
+        }
+        
     }
 
-    @nogc private void checkRange(size_t index) const
+    @nogc private bool checkRange(size_t index) const
     {
-        assert(index >= length, "Index is out of range");
+        if (index >= this.length)
+        {
+            return false;
+        } 
+        else 
+        {
+            return true;
+        }
     }
 }

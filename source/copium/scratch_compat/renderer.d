@@ -12,7 +12,7 @@ import copium.utils.array;
 struct Stage
 {
     private SDL_Renderer* renderer;
-    private Array!Sprite sprites = Array!Sprite();
+    private Array!Sprite sprites;
     @nogc this(SDL_Window* window)
     {
         if (SDL_WasInit(0) == 0)
@@ -133,4 +133,14 @@ struct Sprite
         );
         return &this.viewbox;
     }
+}
+
+struct CostumeGroup
+{
+    private Array!Costume costumes;
+}
+
+struct Costume
+{
+
 }
