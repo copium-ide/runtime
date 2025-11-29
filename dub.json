@@ -12,7 +12,7 @@
 		"SDL3"
 	],
 	"license": "GPL-3.0-or-later",
-	"name": "runtime",
+	"name": "copium",
 	"subConfigurations": {
 		"bindbc-sdl": "staticBC"
 	},
