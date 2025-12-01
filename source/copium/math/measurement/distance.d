@@ -26,8 +26,7 @@ struct Distance(string name, double factor, T)
     }
 
     // Overload binary operators for Distance types. Converts both operands to BaseUnit, performs the operation, and returns the result converted back to the left-hand side's type (this).
-    @nogc auto opBinary(string op, T2)(T2 rhs)
-        if (is(T2 == Distance!U2, U2...)) // Constraint on the RHS type
+    @nogc auto opBinary(string op, T2)(T2 rhs) if (is(T2 == Distance!U2, U2...)) // Constraint on the RHS type
     {
         static if (op == "+" || op == "-" || op == "*" || op == "/")
         {
@@ -46,4 +45,25 @@ struct Distance(string name, double factor, T)
             static assert(false, "Unsupported operator: " ~ op);
         }
     }
+
+    @nogc auto opEquals(RHS)(ref const RHS rhs) const if (is(RHS == Distance!U2, U2...))
+    {
+        return this.toBaseUnit() == rhs.toBaseUnit();
+    }
+
+    @nogc auto opCmp(RHS)(ref const RHS rhs) const 
+        if (is(RHS == Distance!U2, U2...))
+    {
+        double lhsBaseUnit = this.toBaseUnit();
+        double rhsBaseUnit = rhs.toBaseUnit();
+
+        if (lhsBaseUnit < rhsBaseUnit) {
+            return -1;
+        } else if (lhsBaseUnit > rhsBaseUnit) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 }

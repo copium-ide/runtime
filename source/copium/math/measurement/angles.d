@@ -47,4 +47,23 @@ struct Distance(string name, double factor, T)
             static assert(false, "Unsupported operator: " ~ op);
         }
     }
+    @nogc auto opEquals(RHS)(ref const RHS rhs) const if (is(RHS == Distance!U2, U2...))
+    {
+        return this.toBaseUnit() == rhs.toBaseUnit();
+    }
+
+    @nogc auto opCmp(RHS)(ref const RHS rhs) const 
+        if (is(RHS == Distance!U2, U2...))
+    {
+        double lhsBaseUnit = this.toBaseUnit();
+        double rhsBaseUnit = rhs.toBaseUnit();
+
+        if (lhsBaseUnit < rhsBaseUnit) {
+            return -1;
+        } else if (lhsBaseUnit > rhsBaseUnit) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
