@@ -7,7 +7,7 @@
 	"license": "GPL-3.0-or-later",
 	"name": "measurement",
 	"dependencies": {
-		"runtime": {"path": "../../"}
+		"copium": {"path": "../../"}
     },
     "targetPath": "bin",
 	"targetType": "executable",

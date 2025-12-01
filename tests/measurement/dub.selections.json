@@ -6,6 +6,7 @@
 		"bindbc-sdl": "2.2.2",
 		"d-vulkan": "0.3.1",
 		"derelict-util": "2.0.6",
-		"runtime": {"path":"../../"}
+		"runtime": {"path":"../../"},
+		"tinygltf": "1.1.0"
 	}
 }
