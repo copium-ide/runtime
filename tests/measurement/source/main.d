@@ -3,6 +3,10 @@ module main;
 import std.stdio;
 import copium.math.measurement.distance;
 
+alias Meter = Distance!("m", 1, float);
+alias Kilometer = Distance!("km", 1_000, float);
+alias Centimeter = Distance!("cm", 0.01, float);
+
 void main() {
     auto d1 = Kilometer(10.0);
     auto d2 = Meter(500.0);
@@ -22,4 +26,17 @@ void main() {
 
     auto result = Meter(500.0) + Kilometer(10.0);
     writeln(result);
+
+    if (d1 > d2)
+    {
+        writeln("d1 is bigger");
+    } else {
+        writeln("d2 is bigger");
+    }
+    if (d1 == d2)
+    {
+        writeln("equal");
+    } else {
+        writeln("inequal");
+    }
 }
