@@ -5,17 +5,17 @@ import std.format : format;
 import std.math.constants : PI;
 
 /// Universal distance struct
-struct Distance(string name, double factor)
+struct Distance(string name, double factor, T)
 {
-    double value;
+    T value;
 
-    @nogc this(double v)
+    @nogc this(T v)
     {
         this.value = v;
     }
 
     // Method to convert the local value into the common base unit value
-    @nogc double toBaseUnit() const
+    @nogc auto toBaseUnit() const
     {
         return this.value * factor;
     }
@@ -48,7 +48,3 @@ struct Distance(string name, double factor)
         }
     }
 }
-
-// Instantiate specific unit types:
-alias Degree = Distance!("deg", 1*(180/PI)); /// Degrees
-alias Radian = Distance!("rad", 1); /// Radians

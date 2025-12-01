@@ -4,17 +4,17 @@ import std.traits : isFloatingPoint, ReturnType;
 import std.format : format;
 
 /// Universal Time struct
-struct Time(string name, double factor)
+struct Time(string name, double factor, T)
 {
-    double value;
+    T value;
 
-    @nogc this(double v)
+    @nogc this(T v)
     {
         this.value = v;
     }
 
     // Method to convert the local value into the common base unit value
-    @nogc double toBaseUnit() const
+    @nogc auto toBaseUnit() const
     {
         return this.value * factor;
     }
@@ -47,12 +47,3 @@ struct Time(string name, double factor)
         }
     }
 }
-
-// Instantiate specific unit types:
-alias MicroSecond = Time!("ms", 0.000001); /// Microseconds
-alias MilliSecond = Time!("ms", 0.001); /// Milliseconds
-alias Second = Time!("s", 1.0); /// Seconds
-alias Minute = Time!("m", 60.0); /// Minutes
-alias Hour = Time!("h", 3_600.0); /// Hours
-alias Days = Time!("d", 86_400.0); /// Days
-

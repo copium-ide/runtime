@@ -4,17 +4,17 @@ import std.traits : isFloatingPoint, ReturnType;
 import std.format : format;
 
 /// Universal distance struct
-struct Distance(string name, double factor)
+struct Distance(string name, double factor, T)
 {
-    double value;
+    T value;
 
-    @nogc this(double v)
+    @nogc this(T v)
     {
         this.value = v;
     }
 
     // Method to convert the local value into the common base unit value
-    @nogc double toBaseUnit() const
+    @nogc auto toBaseUnit() const
     {
         return this.value * factor;
     }
@@ -47,9 +47,3 @@ struct Distance(string name, double factor)
         }
     }
 }
-
-// Instantiate specific unit types:
-alias Meter = Distance!("m", 1.0); /// Meters
-alias Kilometer = Distance!("km", 1_000.0); /// Kilometers
-alias Mile = Distance!("mi", 1_609.34); /// Miles
-alias Centimeter = Distance!("cm", 0.01); /// Centimeters

@@ -4,17 +4,17 @@ import std.traits : isFloatingPoint, ReturnType;
 import std.format : format;
 
 /// Universal force struct
-struct Force(string name, double factor)
+struct Force(string name, double factor, T)
 {
-    double value;
+    T value;
 
-    @nogc this(double v)
+    @nogc this(T v)
     {
         this.value = v;
     }
 
     // Method to convert the local value into the common base unit value
-    @nogc double toBaseUnit() const
+    @nogc auto toBaseUnit() const
     {
         return this.value * factor;
     }
@@ -47,7 +47,3 @@ struct Force(string name, double factor)
         }
     }
 }
-
-// Instantiate specific unit types:
-alias Newton = Force!("N", 1.0); /// Newtons
-alias Kilonewton = Force!("kN", 1_000.0); /// KiloNewtons

@@ -4,17 +4,17 @@ import std.traits : isFloatingPoint, ReturnType;
 import std.format : format;
 
 /// Universal Mass struct
-struct Mass(string name, double factor)
+struct Mass(string name, double factor, T)
 {
-    double value;
+    T value;
 
-    @nogc this(double v)
+    @nogc this(T v)
     {
         this.value = v;
     }
 
-    // Method to convert the local value into the common base unit value (newton)
-    @nogc double toBaseUnit() const
+    // Method to convert the local value into the common base unit value
+    @nogc auto toBaseUnit() const
     {
         return this.value * factor;
     }
@@ -47,8 +47,3 @@ struct Mass(string name, double factor)
         }
     }
 }
-
-// Instantiate specific unit types:
-alias Gram = Mass!("g", 0.001); /// Grams
-alias Kilogram = Mass!("kg", 1.0); /// Kilograms
-alias Ton = Mass!("t", 1_000.0); /// Metric Ton

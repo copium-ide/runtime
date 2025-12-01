@@ -4,17 +4,17 @@ import std.traits : isFloatingPoint, ReturnType;
 import std.format : format;
 
 /// Universal Speed struct
-struct Speed(string name, double factor)
+struct Speed(string name, double factor, T)
 {
-    double value;
+    T value;
 
-    @nogc this(double v)
+    @nogc this(T v)
     {
         this.value = v;
     }
 
     // Method to convert the local value into the common base unit value
-    @nogc double toBaseUnit() const
+    @nogc auto toBaseUnit() const
     {
         return this.value * factor;
     }
@@ -47,7 +47,3 @@ struct Speed(string name, double factor)
         }
     }
 }
-
-// Instantiate specific unit types:
-// These should all resolve down to how many meters per second they are.
-alias MetersPerSecond = Speed!("m/s", 1.0);
