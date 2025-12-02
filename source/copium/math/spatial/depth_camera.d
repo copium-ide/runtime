@@ -1,5 +1,6 @@
+deprecated("Use a shader please.")
 module copium.math.spatial.depth_camera;
-
+/// This is going to be replaced with a shader
 import copium.math.spatial.vector_3;
 import copium.math.spatial.vector_2;
 import std.math.trigonometry;
