@@ -137,10 +137,33 @@ struct Sprite
 
 struct CostumeGroup
 {
-    private Array!Costume costumes;
+    Array!Costume costumes;
+    @nogc void addCostume(auto data)
+    {
+        costumes.append(Costume(data));
+    }
+    @nogc void removeCostume(int index)
+    {
+        // costumes.remove(index);
+    }
+    @nogc SDL_Texture getCostumeImage(int index)
+    {
+        return costumes[index].render();
+    }
 }
 
 struct Costume
 {
+    bool datatype;
+    Array!byte data;
+    @nogc this(Bitmap data)
+    {
+    }
+    @nogc this(SVG data)
+    {
+    }
+    @nogc SDL_Texture render()
+    {
 
+    }
 }
