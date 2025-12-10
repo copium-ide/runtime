@@ -1,4 +1,4 @@
-module copium.c.string;
+module copium.utils.string;
 
 import core.stdc.stdlib : malloc, free;
 import core.stdc.string : memcpy;
