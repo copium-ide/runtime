@@ -134,7 +134,7 @@ struct Sprite
         return &this.viewbox;
     }
 }
-
+/*
 struct CostumeGroup
 {
     Array!Costume costumes;
@@ -167,3 +167,4 @@ struct Costume
 
     }
 }
+*/
