@@ -5,7 +5,7 @@ import std.stdio;
 import std.string;
 import std.conv;
 import core.stdc.config;
-import copium.c.string : toCString;
+import copium.utils.string : toCString;
 
 public enum float fps = 60;
 public enum float deltaTime = 1 / fps;
