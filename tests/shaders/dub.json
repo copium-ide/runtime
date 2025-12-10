@@ -1,0 +1,25 @@
+{
+	"authors": [
+		"halu"
+	],
+	"copyright": "Copyright © 2025, halu",
+	"description": "testing of the measurement system",
+	"license": "GPL-3.0-or-later",
+	"name": "shaders",
+	"dependencies": {
+		"copium": {"path": "../../"}
+    },
+	"configurations": [
+        {
+            "name": "debug",
+            "buildOptions": ["debugMode", "debugInfo", "debugInfoC"]
+        },
+        {
+            "name": "release",
+            "buildOptions": ["releaseMode"]
+        }
+    ],
+    "targetPath": "bin",
+	"targetType": "executable",
+    "targetName": "shaders"
+}
