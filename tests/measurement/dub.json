@@ -3,13 +3,15 @@
 		"halu"
 	],
 	"copyright": "Copyright © 2025, halu",
+	"dependencies": {
+		"copium": {
+			"path": "../../"
+		}
+	},
 	"description": "testing of the measurement system",
 	"license": "GPL-3.0-or-later",
 	"name": "measurement",
-	"dependencies": {
-		"copium": {"path": "../../"}
-    },
-    "targetPath": "bin",
-	"targetType": "executable",
-    "targetName": "measurement"
+	"targetName": "measurement",
+	"targetPath": "bin",
+	"targetType": "executable"
 }
