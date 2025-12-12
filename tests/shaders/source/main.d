@@ -16,8 +16,7 @@ void main()
     args[0] = "buh";
     Window window1 = Window("triangle", 50, 50, 500, 500, args);
     writeln("making renderer");
-    Renderer renderer1 = Renderer(window1.getWindowContext());
-    renderer1.vSync(false);
+    Renderer renderer1 = Renderer(window1.getWindowContext(), VSYNC_DISABLED);
     writeln("setting fragment");
     renderer1.setFragment(fragmentShaderPath);
     renderer1.setVertex(vertexShaderPath);

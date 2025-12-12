@@ -4,6 +4,9 @@ import bindbc.sdl;
 import std.file;
 import std.stdio;
 
+const bool VSYNC_ENABLED = true;
+const bool VSYNC_DISABLED = false;
+
 struct Renderer
 {
     SDL_GPUDevice* gpu_device;
@@ -12,8 +15,9 @@ struct Renderer
     SDL_GPUShader* fragment;
     SDL_GPUShader* vertex;
     SDL_GPUGraphicsPipeline* pipeline;
+    bool vSyncEnabled = true;
 
-    @nogc this(SDL_Window* window,)
+    @nogc this(SDL_Window* window, bool vsync)
     {
         if (SDL_WasInit(0) == 0)
         {
@@ -32,6 +36,7 @@ struct Renderer
 
         this.window = window;
         SDL_ClaimWindowForGPUDevice(this.gpu_device, this.window);
+        setVSync(vsync);
 
     }
 
@@ -69,7 +74,7 @@ struct Renderer
 
         this.vertex = SDL_CreateGPUShader(this.gpu_device, gpuInfo);
     }
-    void createPipeline()
+    @nogc void createPipeline()
     {
         SDL_GPUGraphicsPipelineCreateInfo pipeline_info;
         
@@ -91,7 +96,7 @@ struct Renderer
         this.pipeline = SDL_CreateGPUGraphicsPipeline(this.gpu_device, &pipeline_info);
     }
 
-    void render()
+    @nogc void render()
     {
         SDL_GPUCommandBuffer* cmd_buf = SDL_AcquireGPUCommandBuffer(this.gpu_device);
         if (cmd_buf)
@@ -123,8 +128,9 @@ struct Renderer
             SDL_SubmitGPUCommandBuffer(cmd_buf);
         }
     }
-    void vSync(bool state)
+    @nogc void setVSync(bool state)
     {
+        this.vSyncEnabled = state;
         if (state == true)
         {
             if (SDL_WindowSupportsGPUPresentMode(this.gpu_device, this.window, SDL_GPU_PRESENTMODE_MAILBOX)){
