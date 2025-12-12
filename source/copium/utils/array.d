@@ -10,6 +10,8 @@ struct Array(T)
     size_t length = 0;
     size_t capacity = 0;
 
+    @disable this(this);  // ✅ Prevent copying
+    
     @nogc ~this()
     {
         if (ptr)
@@ -20,19 +22,18 @@ struct Array(T)
             this.capacity = 0;
         }
     }
-
+    
     @nogc bool append(T value)
     {
         if (this.length == capacity)
         {
-            // Standard practice is to double capacity
             size_t newCapacity = capacity == 0 ? 4 : capacity * 2;
-
-            if((ptr = cast(T*) realloc(ptr, newCapacity * T.sizeof)) !is null)
+            T* newPtr = cast(T*) realloc(ptr, newCapacity * T.sizeof);
+            if (newPtr is null)
             {
                 return false;
             }
-            
+            ptr = newPtr;
             capacity = newCapacity;
         }
         ptr[this.length] = value;
@@ -40,9 +41,61 @@ struct Array(T)
         return true;
     }
 
+    @nogc auto reduce(string operation)()
+    {
+        if (this.length == 0)
+        {
+            return T.init;
+        }
+
+        T result = ptr[0];
+
+        static if (operation == "|")
+        {
+            for (size_t i = 1; i < this.length; i++)
+            {
+                result |= ptr[i];
+            }
+        }
+        else static if (operation == "&")
+        {
+            for (size_t i = 1; i < this.length; i++)
+            {
+                result &= ptr[i];
+            }
+        }
+        else static if (operation == "^")
+        {
+            for (size_t i = 1; i < this.length; i++)
+            {
+                result ^= ptr[i];
+            }
+        }
+        else static if (operation == "+")
+        {
+            for (size_t i = 1; i < this.length; i++)
+            {
+                result += ptr[i];
+            }
+        }
+        else static if (operation == "*")
+        {
+            for (size_t i = 1; i < this.length; i++)
+            {
+                result *= ptr[i];
+            }
+        }
+        else
+        {
+            static assert(false, "Unsupported operation: " ~ operation);
+        }
+
+        return result;
+    }
+
     @nogc T opIndex(size_t index) const
     {
-        if(checkRange(index))
+        if (checkRange(index))
         {
             return ptr[index];
         }
@@ -50,7 +103,7 @@ struct Array(T)
         {
             return typeof(return).init;
         }
-        
+
     }
 
     @nogc private bool checkRange(size_t index) const
@@ -58,8 +111,8 @@ struct Array(T)
         if (index >= this.length)
         {
             return false;
-        } 
-        else 
+        }
+        else
         {
             return true;
         }
