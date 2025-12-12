@@ -123,4 +123,20 @@ struct Renderer
             SDL_SubmitGPUCommandBuffer(cmd_buf);
         }
     }
+    void vSync(bool state)
+    {
+        if (state == true)
+        {
+            if (SDL_WindowSupportsGPUPresentMode(this.gpu_device, this.window, SDL_GPU_PRESENTMODE_MAILBOX)){
+                SDL_SetGPUSwapchainParameters(this.gpu_device, this.window, SDL_GPU_SWAPCHAINCOMPOSITION_SDR, SDL_GPU_PRESENTMODE_MAILBOX);
+            }
+            
+        } else {
+            
+            if (SDL_WindowSupportsGPUPresentMode(this.gpu_device, this.window, SDL_GPU_PRESENTMODE_IMMEDIATE)){
+                SDL_SetGPUSwapchainParameters(this.gpu_device, this.window, SDL_GPU_SWAPCHAINCOMPOSITION_SDR, SDL_GPU_PRESENTMODE_IMMEDIATE);
+            }
+            
+        }
+    }
 }
